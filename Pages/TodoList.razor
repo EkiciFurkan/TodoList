@@ -1,0 +1,97 @@
+﻿@page "/todoList"
+
+@* Program.cs içine build ettiğim classı çağırıyorum *@
+@inject TodoTitleContentService x
+
+<h3>@TodoTitleContentService.GetTitleContent("Todo Title")</h3>
+
+<input type="text" @bind="_newTodoItem"/>
+<button @onclick="AddTodo">@TodoTitleContentService.GetButtonTitle("Add")</button>
+
+<ul>
+
+    <h3>@(_todos.All(todo => todo.IsDone) ? "Compeleted" : _todos.Count(todo => !todo.IsDone))</h3>
+
+    @foreach (var todo in _todos)
+    {
+        <li style="@StrikeThrough(todo)">
+            <input type="checkbox" @bind="todo.IsDone"/>
+            <input type="text" @bind="todo.Task"/>
+            <button @onclick="() => RemoveTodo(todo)"> @TodoTitleContentService.GetButtonTitle("Delete") </button>
+        </li>
+    }
+    <button @onclick="DeleteAllTodos"> @TodoTitleContentService.GetButtonTitle("Delete All") </button>
+    <button @onclick="CheckAllTodos"> @TodoTitleContentService.GetButtonTitle("Check All") </button>
+</ul>
+
+
+
+@if (!string.IsNullOrEmpty(_errorMessage))
+{
+    <div class="alert alert-danger">@_errorMessage</div>
+}
+
+@code {
+
+    // Sayfa açıldığında da bir kaç verinin gelmesi için default bir array ekliyorum
+    private  List<Todo> _todos = new([
+        new Todo() { Task = "Örnek görev 1", IsDone = false },
+        new Todo() { Task = "Örnek görev 2", IsDone = false },
+        new Todo() { Task = "Örnek görev 3", IsDone = false }
+    ]);
+
+    // Varsayılan olarak boş bir todolist ve hata mesajı ekliyorum.
+    private string? _newTodoItem;
+    private string? _errorMessage;
+
+    private void AddTodo()
+    {
+        @* Değerin null mu yoksa boşluk mu onu kontrol ediyorum *@
+        if (!string.IsNullOrWhiteSpace(_newTodoItem))
+        {
+            _todos.Add(new Todo { Task = _newTodoItem });
+            _newTodoItem = string.Empty;
+            _errorMessage = null;
+        }
+    }
+
+    // Kısa olduğu için parantezlerle uzatmaya gerek görmedim
+    private void RemoveTodo(Todo todo) => _todos.Remove(todo);
+
+    private void DeleteAllTodos()
+    {
+        if (_todos.Count > 0)
+        {
+            _todos.Clear();
+            _errorMessage = null;
+        }
+        else
+        {
+            _errorMessage = "Error: There Is No Todos To Delete";
+        }
+    }
+
+    private void CheckAllTodos()
+    {
+        if (_todos.Count is 0)
+        {
+            _errorMessage = "Error: There Is No Todos";
+            return;
+        }
+
+        if (_todos.All(todo => todo.IsDone))
+        {
+            _errorMessage = "Error: All Todos Are Already Completed";
+            return;
+        }
+
+        foreach (var todo in _todos)
+        {
+            todo.IsDone = true;
+        }
+
+        _errorMessage = null;
+    }
+
+    private static string StrikeThrough(Todo todo) => todo.IsDone ? "background: grey;" : "";
+}
