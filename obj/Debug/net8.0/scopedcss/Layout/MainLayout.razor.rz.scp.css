@@ -6,6 +6,15 @@
 
 main[b-5383j6hyu8] {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+main > article[b-5383j6hyu8] {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sidebar[b-5383j6hyu8] {

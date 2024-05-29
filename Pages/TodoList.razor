@@ -3,10 +3,10 @@
 @* Program.cs içine build ettiğim classı çağırıyorum *@
 @inject TodoTitleContentService x
 
-<h3>@TodoTitleContentService.GetTitleContent("Todo Title")</h3>
+<h3>Todo Title</h3>
 
 <input type="text" @bind="_newTodoItem"/>
-<button @onclick="AddTodo">@TodoTitleContentService.GetButtonTitle("Add")</button>
+<button @onclick="AddTodo">Add</button>
 
 <ul>
 
@@ -17,14 +17,13 @@
         <li style="@StrikeThrough(todo)">
             <input type="checkbox" @bind="todo.IsDone"/>
             <input type="text" @bind="todo.Task"/>
-            <button @onclick="() => RemoveTodo(todo)"> @TodoTitleContentService.GetButtonTitle("Delete") </button>
+            <button @onclick="() => RemoveTodo(todo)"> Delete </button>
         </li>
     }
-    <button @onclick="DeleteAllTodos"> @TodoTitleContentService.GetButtonTitle("Delete All") </button>
-    <button @onclick="CheckAllTodos"> @TodoTitleContentService.GetButtonTitle("Check All") </button>
-    
-</ul>
+    <button @onclick="DeleteAllTodos"> Delete All </button>
+    <button @onclick="CheckAllTodos"> Check All </button>
 
+</ul>
 
 
 @if (!string.IsNullOrEmpty(_errorMessage))
@@ -35,11 +34,13 @@
 @code {
 
     // Sayfa açıldığında da bir kaç verinin gelmesi için default bir array ekliyorum
-    private  List<Todo> _todos = new([
-        new Todo() { Task = "Örnek görev 1", IsDone = false },
-        new Todo() { Task = "Örnek görev 2", IsDone = false },
-        new Todo() { Task = "Örnek görev 3", IsDone = false }
-    ]);
+    private List<Todo> _todos = new()
+    {
+        new() { Task = "Örnek görev 1", IsDone = false },
+        new() { Task = "Örnek görev 2", IsDone = false },
+        new() { Task = "Örnek görev 3", IsDone = false }
+    };
+
 
     // Varsayılan olarak boş bir todolist ve hata mesajı ekliyorum.
     private string? _newTodoItem;
@@ -74,7 +75,7 @@
 
     private void CheckAllTodos()
     {
-        if (_todos.Count is 0)
+        if (_todos.Count < 1)
         {
             _errorMessage = "Error: There Is No Todos";
             return;

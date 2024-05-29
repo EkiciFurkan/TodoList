@@ -1,0 +1,46 @@
+@*
+    ['I', 'J', 'L', 'O', 'S', 'T', 'Z'] Şekilleri temsil eden harfler
+    
+    grid içerisinde ki her cell 0 değeri ile başlamalı
+    
+    I = 1
+    J = 2
+    L = 3
+    O = 4
+    S = 5
+    T = 6
+    Z = 7
+    
+    0 0 0 0 0 0 0 0 0 0
+    1 0 0 0 0 0 0 0 0 1
+    1 0 2 0 0 0 0 0 0 1
+    1 0 2 4 4 4 4 4 4 1
+    1 2 2 4 4 4 4 4 4 1
+    
+    
+    index row + 1 de 0 dan başka sayı gelene kadar ise aşağıya kaydıralacak
+    
+    
+    bir row da 0 yok ise tüm rowu 0 a eşitle; Temizlenen satır +1 temizlenen satır kadar da bir yukarı da row
+    aşağıya inecek
+*@
+
+@page "/tetris"
+
+
+<div id="tetris">
+    @for (var i = 0; i < 10; i++)
+    {
+        @for (var x = 0; x < 20; x++)
+        {
+            <div class="cell"></div>
+        }
+    }
+</div>
+
+
+@code {
+
+    
+
+}

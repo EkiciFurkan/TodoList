@@ -30,6 +30,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Furkan/RiderProjects/BlazorApp1/BlazorApp1/Pages/Roman.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUm9tYW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Furkan/RiderProjects/BlazorApp1/BlazorApp1/Pages/Tetris.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGV0cmlzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Furkan/RiderProjects/BlazorApp1/BlazorApp1/Pages/TodoList.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVG9kb0xpc3QucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
