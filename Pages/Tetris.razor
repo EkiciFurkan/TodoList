@@ -12,14 +12,15 @@
     Z = 7
     
     0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0
+    0 0 0 0 0 0 0 0 0 0
     1 0 0 0 0 0 0 0 0 1
     1 0 2 0 0 0 0 0 0 1
     1 0 2 4 4 4 4 4 4 1
     1 2 2 4 4 4 4 4 4 1
     
-    
     index row + 1 de 0 dan başka sayı gelene kadar ise aşağıya kaydıralacak
-    
     
     bir row da 0 yok ise tüm rowu 0 a eşitle; Temizlenen satır +1 temizlenen satır kadar da bir yukarı da row
     aşağıya inecek
@@ -27,20 +28,42 @@
 
 @page "/tetris"
 
-
 <div id="tetris">
-    @for (var i = 0; i < 10; i++)
+    @foreach (var cell in _cells)
     {
-        @for (var x = 0; x < 20; x++)
-        {
-            <div class="cell"></div>
-        }
+        <div class="cell">
+            @(@cell.Id > 0 ? "1" : @cell.Id)
+        </div>
     }
 </div>
 
 
 @code {
 
-    
+    // Array de olabilir lakin şuanlık daha rahat çalışmak adına eklenebilir yapıyorum
+    private readonly List<Cell> _cells = new List<Cell>();
+
+    public class Cell
+    {
+        // Set değerini daha sonra init yaparak yeniden oluşturarak ıd değiştirme yap
+        public int Id { get; set;}
+    }
+
+    protected override void OnInitialized()
+    {
+        for (var row = 0; row < 20; row++)
+        {
+            for (var col = 0; col < 10; col++)
+            {
+                var index = row * 10 + col;
+                _cells.Add(new Cell { Id = 0 });
+
+                if (row == 2)
+                {
+                    _cells[index].Id = 3;
+                }
+            }
+        }
+    }
 
 }
