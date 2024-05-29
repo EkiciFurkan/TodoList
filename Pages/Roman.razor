@@ -1,0 +1,18 @@
+@page "/Roman"
+<h3>Roman</h3>
+
+@foreach (var romanMap in _romanLettersTest)
+{
+    <p> @romanMap.Key = @romanMap.Value </p>
+}
+
+@code {
+
+    readonly Dictionary<char, int> _romanLettersTest = new()
+    {
+        { 'I', 1 },
+        { 'V', 5 },
+        { 'X', 10 }
+    };
+
+}
